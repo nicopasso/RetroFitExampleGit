@@ -33,7 +33,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void success(List<Repo> repos, Response response) {
 
-                //For sull'elenco dei Repo trovati
+                //For sull'elenco dei Repo
                  for (Repo repo : repos) {
                      Log.e("REPO NAME AND URL", repo.name + " " + repo.url);
                  }
