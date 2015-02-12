@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.List;
-import java.util.Observable;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -34,7 +33,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void success(List<Repo> repos, Response response) {
                  for (Repo repo : repos) {
-                     Log.e("REPO NAME", repo.name);
+                     Log.e("REPO NAME AND URL", repo.name + " " + repo.url);
                  }
             }
 
