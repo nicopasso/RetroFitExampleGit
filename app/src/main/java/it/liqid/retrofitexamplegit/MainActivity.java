@@ -32,6 +32,8 @@ public class MainActivity extends ActionBarActivity {
         service.listRepos("nicopasso", new Callback<List<Repo>>() {
             @Override
             public void success(List<Repo> repos, Response response) {
+
+                //For sull'elenco dei Repo trovati
                  for (Repo repo : repos) {
                      Log.e("REPO NAME AND URL", repo.name + " " + repo.url);
                  }
