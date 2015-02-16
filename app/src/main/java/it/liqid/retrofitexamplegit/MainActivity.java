@@ -9,12 +9,8 @@ import android.view.MenuItem;
 import java.util.List;
 
 import retrofit.Callback;
-import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import retrofit.http.GET;
-import retrofit.http.Path;
-
 
 public class MainActivity extends ActionBarActivity {
 
@@ -23,20 +19,19 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint("https://api.github.com")
-                .build();
+        RestClient restClient = new RestClient();
 
-        GithubService service = restAdapter.create(GithubService.class);
 
-        service.listRepos("nicopasso", new Callback<List<Repo>>() {
+        restClient.getGithubOwnerService().ownerInfo("nicopasso", new Callback<List<Owner>>() {
+
+
             @Override
-            public void success(List<Repo> repos, Response response) {
+            public void success(List<Owner> owners, Response response) {
 
-                //For sull'elenco dei Repo
-                 for (Repo repo : repos) {
-                     Log.e("REPO NAME AND URL", repo.name + " " + repo.url);
-                 }
+                for (Owner owner : owners) {
+                    Log.e("OWNER NAME", owner.usernameOwner);
+                }
+
             }
 
             @Override
@@ -44,8 +39,6 @@ public class MainActivity extends ActionBarActivity {
 
             }
         });
-
-
     }
 
 
@@ -71,8 +64,10 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public interface GithubService {
+    /*public interface GithubService {
+
+        @FormUrlEncoded //mi assicuro che sia usato l'encoding giusto
         @GET("/users/{user}/repos")
         void listRepos(@Path("user") String user, Callback<List<Repo>> callback);
-    }
+    }*/
 }
